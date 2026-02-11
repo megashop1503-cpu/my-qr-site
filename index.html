@@ -1,33 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Don't Click</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading...</title>
 
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background: black;
-            overflow: hidden;
-        }
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    overflow: hidden;
+    height: 100%;
+}
 
-        video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-        }
-    </style>
+#startScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    display: none;
+}
+</style>
 </head>
+
 <body>
 
-<video autoplay playsinline>
+<div id="startScreen">Nhấn vào đây để xem 💖</div>
+
+<video id="myVideo">
     <source src="360p-watermark.mp4" type="video/mp4">
 </video>
+
+<script>
+const startScreen = document.getElementById("startScreen");
+const video = document.getElementById("myVideo");
+
+startScreen.addEventListener("click", function() {
+
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    }
+
+    startScreen.style.display = "none";
+    video.style.display = "block";
+    video.play();
+});
+</script>
 
 </body>
 </html>
