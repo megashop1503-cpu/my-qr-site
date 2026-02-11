@@ -2,56 +2,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Video</title>
-
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  height: 100%;
-  overflow: hidden;
+html,body{
+  margin:0;
+  padding:0;
+  background:black;
+  height:100%;
+  overflow:hidden;
 }
-
-#startScreen {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#startBtn{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  padding:20px 40px;
+  font-size:20px;
+  background:red;
+  color:white;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
 }
-
-#startBtn {
-  padding: 20px 40px;
-  font-size: 20px;
-  background: hotpink;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 0 20px pink;
-}
-
-video {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
+video{
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
+  display:none;
 }
 </style>
 </head>
-
 <body>
 
-<div id="startScreen">
-  <button id="startBtn">💖 Bấm vô để xem nha em iu 💖</button>
-</div>
+<button id="startBtn">Bấm vào để xem nha em iu ❤️</button>
 
 <video id="myVideo" playsinline>
   <source src="video.mp4" type="video/mp4">
@@ -59,11 +42,10 @@ video {
 
 <script>
 const btn = document.getElementById("startBtn");
-const startScreen = document.getElementById("startScreen");
 const video = document.getElementById("myVideo");
 
-btn.addEventListener("click", () => {
-  startScreen.style.display = "none";
+btn.addEventListener("click", function(){
+  btn.style.display = "none";
   video.style.display = "block";
   video.muted = false;
   video.play();
