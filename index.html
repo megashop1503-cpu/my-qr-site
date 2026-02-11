@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Don't Click</title>
 
@@ -9,34 +8,27 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: black;
     height: 100%;
+    background: black;
     overflow: hidden;
 }
 
-#overlay {
+#startScreen {
     position: fixed;
     width: 100%;
     height: 100%;
     background: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#btn {
-    padding: 18px 35px;
-    font-size: 20px;
-    border: none;
-    border-radius: 40px;
-    background: red;
-    color: white;
+    font-size: 22px;
+    text-align: center;
 }
 
 video {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: none;
 }
@@ -45,27 +37,30 @@ video {
 
 <body>
 
-<div id="overlay">
-    <button id="btn">Bấm vô để xem nha em iu ❤️</button>
+<div id="startScreen" onclick="startVideo()">
+    Bấm vô để xem nha em iu ❤️
 </div>
 
-<video id="vid" playsinline>
+<video id="myVideo" playsinline>
     <source src="360p-watermark.mp4" type="video/mp4">
 </video>
 
 <script>
-const btn = document.getElementById("btn");
-const overlay = document.getElementById("overlay");
-const video = document.getElementById("vid");
+function startVideo() {
+    const video = document.getElementById("myVideo");
+    const start = document.getElementById("startScreen");
 
-btn.addEventListener("click", () => {
-    overlay.style.display = "none";
+    start.style.display = "none";
     video.style.display = "block";
-    video.muted = false;
-    video.play().catch(err => {
-        console.log("Play error:", err);
-    });
-});
+
+    video.play();
+
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.webkitEnterFullscreen) {
+        video.webkitEnterFullscreen(); // iPhone
+    }
+}
 </script>
 
 </body>
